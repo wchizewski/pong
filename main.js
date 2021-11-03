@@ -1,9 +1,8 @@
 // Pong by Will
-
 // Setup Canvas and Graphics Context
 let cnv = document.getElementById("myCanvas");
 let ctx = cnv.getContext("2d");
-cnv.width = 1000;
+cnv.width = 1100;
 cnv.height = 700;
 
 // Global variables
@@ -11,8 +10,10 @@ let leftScore = 0;
 let rightScore = 0;
 let paddle1y = 40;
 let paddle2y = 560;
-let ballx = 485;
-let bally = 335;
+let ballx = 537.5;
+let ballxspeed = 6;
+let ballyspeed = 6;
+let bally = 337.5;
 let wPressed = false;
 let sPressed = false;
 let upArrowPressed = false;
@@ -29,12 +30,14 @@ function loop() {
         if (paddle1y < 10) {
             paddle1y = 10
         }
-    } if (sPressed) {
+    } else if (sPressed) {
         paddle1y += 5
         if (paddle1y > 590) {
             paddle1y = 590
         }
-    } if (upArrowPressed) {
+    } 
+    // Right paddle movement
+    if (upArrowPressed) {
         paddle2y -= 5
         if (paddle2y < 10) {
             paddle2y = 10
@@ -45,33 +48,67 @@ function loop() {
             paddle2y = 590
         }
     }
+    
+    // Move ball
+    ballx += ballxspeed;
+    if (ballx + 25 > cnv.width) {
+        ballx = cnv.width - 25;
+        ballxspeed = -6;
+    } else if (ballx < 0) {
+        ballx = 0;
+        ballxspeed = 4;
+    }
+
+    bally += ballyspeed
+    if (bally + 25 > cnv.height) {
+        bally = cnv.height - 25;
+        ballyspeed = -4;
+    } else if (bally < 0) {
+        bally = 0;
+        ballyspeed = 6;
+    }
+
+    // collision with paddle
+    
+    if (ballx + 25 == cnv.width) {
+        leftScore++
+        ballReset()
+    } if (ballx == 0) {
+        rightScore++
+        ballReset()
+    }
 
     // background
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, cnv.width, cnv.height);
     ctx.fillStyle = "white";
     for (let y = 10; y <= 680; y += 20) {
-        ctx.fillRect(495, y, 10, 10)
+        ctx.fillRect(545, y, 10, 10)
     }
 
     // score
     ctx.font = "55px Arial";
     ctx.fillStyle = "white";
-    ctx.fillText(leftScore, 458, 50);
+    ctx.fillText(leftScore, 508, 50);
 
     ctx.font = "55px Arial";
     ctx.fillStyle = "white";
-    ctx.fillText(rightScore, 513, 50);
+    ctx.fillText(rightScore, 563, 50);
 
     // paddles
     ctx.fillRect(50, paddle1y, 15, 100)
 
-    ctx.fillRect(935, paddle2y, 15, 100)
+    ctx.fillRect(1035, paddle2y, 15, 100)
 
     // ball
-    ctx.fillRect(ballx, bally, 30, 30)
+    ctx.fillRect(ballx, bally, 25, 25)
 
     requestAnimationFrame(loop);
+}
+
+function ballReset () {
+    ballx = 535;
+    bally = 335;
 }
 
 // key events
@@ -101,3 +138,10 @@ function keyupHandler(event) {
         downArrowPressed = false;
 }
 
+// function ballMove () {
+//     Math.random
+//     console.log(Math.random)
+//     if (Math.random < 0.5) {
+//         ballx--;
+//     }
+// }
