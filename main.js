@@ -28,7 +28,7 @@ function loop() {
     // Logic
     // Left Paddle Movement
     if (wPressed) {
-        paddle1y = -5
+        paddle1y -= 5
         if (paddle1y < 10) {
             paddle1y = 10
         }
