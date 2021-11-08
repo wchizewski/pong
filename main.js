@@ -12,7 +12,7 @@ let paddle1x = 50;
 let paddle2x = 1035;
 let paddle1y = 40;
 let paddle2y = 560;
-let ballx = 537.5;
+let ballx = 540;
 let ballxspeed = 5;
 let ballyspeed = 5;
 let bally = 337.5;
@@ -21,47 +21,38 @@ let sPressed = false;
 let upArrowPressed = false;
 let downArrowPressed = false;
 let framecount = 0;
-let collision = false;
-
 
 // animate
 requestAnimationFrame(loop);
 function loop() {
     framecount++
+    if (framecount)
     // Logic
     // Left Paddle Movement
     if (wPressed) {
-        paddle1y -= 5
+        paddle1y -= 6
         if (paddle1y < 10) {
             paddle1y = 10
         }
     } else if (sPressed) {
-        paddle1y += 5
+        paddle1y += 6
         if (paddle1y > 590) {
             paddle1y = 590
         }
     }
     // Right paddle movement
     if (upArrowPressed) {
-        paddle2y -= 5
+        paddle2y -= 6
         if (paddle2y < 10) {
             paddle2y = 10
         }
     } if (downArrowPressed) {
-        paddle2y += 5
+        paddle2y += 6
         if (paddle2y > 590) {
             paddle2y = 590
         }
 
     }
-
-    // Move ball
-    if (framecount >= 180) {
-        if (!collision) {
-        ballx += 5
-        bally += ballyspeed
-    }
-}
 
     if (ballx + 25 > cnv.width) {
         ballx = cnv.width - 25;
@@ -81,11 +72,15 @@ function loop() {
     }
 
     // collision with paddle
-    console.log(ballxspeed)
     // if (le1 < re2 && re1 > le2 && be1 > te2 && te1 < be2) {}
-    if (ballx < paddle2x + 15 && ballx + 15 > paddle2x && bally + 25 > paddle2y && bally < paddle2y + 100) {
-        ballx -= 5
-        collision = true;
+    if (ballx < paddle2x + 15 && ballx + 15 > paddle2x && bally + 20 > paddle2y && bally < paddle2y + 100) {
+        ballx = paddle2x - 15
+        ballxspeed -= 10
+    }
+
+    if (ballx < paddle1x + 15 && ballx + 15 > paddle1x && bally + 20 > paddle1y && bally < paddle1y + 100) {
+        ballx = paddle1x + 15
+        ballxspeed += 10
     }
 
     // console.log(collision)
@@ -121,14 +116,17 @@ function loop() {
     ctx.fillRect(paddle2x, paddle2y, 15, 100)
 
     // ball
-    ctx.fillRect(ballx, bally, 25, 25)
+    ctx.fillRect(ballx, bally, 20, 20)
+
+    // Move ball
+    if (framecount >= 180) {
+        ballx += ballxspeed
+        bally += ballyspeed
+    }
+
 
     requestAnimationFrame(loop);
 }
-
-// function start() {
-//     ballx += 5
-// }
 
 function ballReset() {
     ballx = 535;
