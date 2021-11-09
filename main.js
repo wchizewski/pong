@@ -10,7 +10,7 @@ let leftScore = 0;
 let rightScore = 0;
 let paddle1x = 50;
 let paddle2x = 1035;
-let paddle1y = 40;
+let paddle1y = 35;
 let paddle2y = 560;
 let ballx = 540;
 let ballxspeed = 5;
@@ -21,12 +21,12 @@ let sPressed = false;
 let upArrowPressed = false;
 let downArrowPressed = false;
 let framecount = 0;
+let leftScorex = 505;
 
 // animate
 requestAnimationFrame(loop);
 function loop() {
     framecount++
-    if (framecount)
     // Logic
     // Left Paddle Movement
     if (wPressed) {
@@ -40,6 +40,7 @@ function loop() {
             paddle1y = 590
         }
     }
+
     // Right paddle movement
     if (upArrowPressed) {
         paddle2y -= 6
@@ -51,9 +52,9 @@ function loop() {
         if (paddle2y > 590) {
             paddle2y = 590
         }
-
     }
 
+    // bounce
     if (ballx + 25 > cnv.width) {
         ballx = cnv.width - 25;
         ballxspeed = -5;
@@ -61,7 +62,6 @@ function loop() {
         ballx = 0;
         ballxspeed = 5;
     }
-
 
     if (bally + 25 > cnv.height) {
         bally = cnv.height - 25;
@@ -83,8 +83,6 @@ function loop() {
         ballxspeed += 10
     }
 
-    // console.log(collision)
-
     if (ballx + 25 == cnv.width) {
         leftScore++
         ballReset()
@@ -101,10 +99,43 @@ function loop() {
         ctx.fillRect(545, y, 10, 10)
     }
 
+    // if (framecount >= 1800) {
+    //     ballxspeed = 6
+    //     ballyspeed = 6
+    // }
+
+    // Move ball
+    if (framecount >= 120
+        // && framecount < 1800
+    ) {
+        ballx += ballxspeed
+        bally += ballyspeed
+    }
+    // else if (framecount >= 1800) {
+    //     ballx += ballxspeed
+    //     bally += ballyspeed
+    // } 
+
+    if (leftScore == 10) {
+        leftScorex = 475;
+    } else if (leftScore == 100) {
+        leftScorex = 445;
+    } else if (leftScore == 1000) {
+        leftScorex = 415;
+    } else if (leftScore == 10000) {
+        leftScorex = 385;
+    } else if (leftScore == 100000) {
+        leftScorex = 355;
+    } else if (leftScore == 1000000) {
+        leftScorex = 325;
+    } else if (leftScore == 10000000) {
+        leftScorex = 295;
+    }
+
     // score
     ctx.font = "55px Arial";
     ctx.fillStyle = "white";
-    ctx.fillText(leftScore, 420, 50);
+    ctx.fillText(leftScore, leftScorex, 50);
 
     ctx.font = "55px Arial";
     ctx.fillStyle = "white";
@@ -118,19 +149,21 @@ function loop() {
     // ball
     ctx.fillRect(ballx, bally, 20, 20)
 
-    // Move ball
-    if (framecount >= 180) {
-        ballx += ballxspeed
-        bally += ballyspeed
-    }
-
-
     requestAnimationFrame(loop);
 }
+
 
 function ballReset() {
     ballx = 535;
     bally = 335;
+    let randomspeed = Math.random()
+    if (randomspeed < 0.5) {
+        ballxspeed = -5
+        ballyspeed = -5
+    } else {
+        ballxspeed = 5
+        ballyspeed = 5
+    }
 }
 
 // key events
