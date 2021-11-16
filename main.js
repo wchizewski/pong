@@ -57,30 +57,30 @@ function loop() {
     // bounce
     if (ballx + 25 > cnv.width) {
         ballx = cnv.width - 25;
-        ballxspeed = -5;
+        ballxspeed = -ballxspeed;
     } else if (ballx < 0) {
         ballx = 0;
-        ballxspeed = 5;
+        ballxspeed = ballxspeed;
     }
 
     if (bally + 25 > cnv.height) {
         bally = cnv.height - 25;
-        ballyspeed = -5;
+        ballyspeed = -ballyspeed;
     } else if (bally < 0) {
         bally = 0;
-        ballyspeed = 5;
+        ballyspeed = ballyspeed * -1;
     }
 
     // collision with paddle
-    // if (le1 < re2 && re1 > le2 && be1 > te2 && te1 < be2) {}
+    // if (le1 < re2 && re1 > le2 && be1 > te2 && te1 < be2) {}ss
     if (ballx < paddle2x + 15 && ballx + 15 > paddle2x && bally + 20 > paddle2y && bally < paddle2y + 100) {
         ballx = paddle2x - 15
-        ballxspeed -= 10
+        ballxspeed -= ballxspeed * 2;
     }
 
     if (ballx < paddle1x + 15 && ballx + 15 > paddle1x && bally + 20 > paddle1y && bally < paddle1y + 100) {
         ballx = paddle1x + 15
-        ballxspeed += 10
+        ballxspeed += ballxspeed * -2;
     }
 
     if (ballx + 25 == cnv.width) {
@@ -99,22 +99,17 @@ function loop() {
         ctx.fillRect(545, y, 10, 10)
     }
 
-    // if (framecount >= 1800) {
-    //     ballxspeed = 6
-    //     ballyspeed = 6
-    // }
-
     // Move ball
-    if (framecount >= 120
-        // && framecount < 1800
-    ) {
+    if (framecount >= 120) {
         ballx += ballxspeed
         bally += ballyspeed
     }
-    // else if (framecount >= 1800) {
-    //     ballx += ballxspeed
-    //     bally += ballyspeed
-    // } 
+    
+    // if (framecount >= 300) {
+    //     ballxspeed = 7
+    //     ballyspeed = 7
+    // }
+
 
     if (leftScore == 10) {
         leftScorex = 475;
