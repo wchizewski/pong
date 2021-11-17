@@ -13,8 +13,8 @@ let paddle2x = 1035;
 let paddle1y = 35;
 let paddle2y = 560;
 let ballx = 540;
-let ballxspeed = 5;
-let ballyspeed = 5;
+let ballxspeed = 6;
+let ballyspeed = 6;
 let bally = 337.5;
 let wPressed = false;
 let sPressed = false;
@@ -22,6 +22,7 @@ let upArrowPressed = false;
 let downArrowPressed = false;
 let framecount = 0;
 let leftScorex = 505;
+
 
 // animate
 requestAnimationFrame(loop);
@@ -39,6 +40,12 @@ function loop() {
         if (paddle1y > 590) {
             paddle1y = 590
         }
+    }
+
+    if (framecount == 300) {
+        ballxspeed = 8
+        ballyspeed = 8
+        console.log("300")
     }
 
     // Right paddle movement
@@ -72,15 +79,17 @@ function loop() {
     }
 
     // collision with paddle
-    // if (le1 < re2 && re1 > le2 && be1 > te2 && te1 < be2) {}ss
+    // if (le1 < re2 && re1 > le2 && be1 > te2 && te1 < be2)
     if (ballx < paddle2x + 15 && ballx + 15 > paddle2x && bally + 20 > paddle2y && bally < paddle2y + 100) {
         ballx = paddle2x - 15
         ballxspeed -= ballxspeed * 2;
+        console.log(ballxspeed * 2)
     }
 
     if (ballx < paddle1x + 15 && ballx + 15 > paddle1x && bally + 20 > paddle1y && bally < paddle1y + 100) {
         ballx = paddle1x + 15
         ballxspeed += ballxspeed * -2;
+        console.log(ballxspeed * 2)
     }
 
     if (ballx + 25 == cnv.width) {
@@ -104,11 +113,7 @@ function loop() {
         ballx += ballxspeed
         bally += ballyspeed
     }
-    
-    // if (framecount >= 300) {
-    //     ballxspeed = 7
-    //     ballyspeed = 7
-    // }
+
 
 
     if (leftScore == 10) {
@@ -151,13 +156,14 @@ function loop() {
 function ballReset() {
     ballx = 535;
     bally = 335;
+    framecount = 120
     let randomspeed = Math.random()
     if (randomspeed < 0.5) {
-        ballxspeed = -5
-        ballyspeed = -5
+        ballxspeed = -6
+        ballyspeed = -6
     } else {
-        ballxspeed = 5
-        ballyspeed = 5
+        ballxspeed = 6
+        ballyspeed = 6
     }
 }
 
