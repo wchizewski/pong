@@ -24,6 +24,7 @@ let framecount = 0;
 let leftScorex = 505;
 let directionx = 0
 let directiony = 0
+let calculate = false;
 
 // animate
 requestAnimationFrame(loop);
@@ -43,6 +44,33 @@ function loop() {
         }
     }
 
+    // if (directionx == -1 && calculate == false) {
+    //     calculate = true;
+    //     if (calculate = true) {
+    //         var y = bally;
+    //         let bounce = ballyspeed;
+    //         for (let x = ballx; x > 65; x += ballxspeed) {
+    //             console.log(y)
+    //             if (y + 25 > cnv.height) {
+    //                 y = cnv.height - 25;
+    //                 bounce = -bounce
+    //             } else if (y < 0) {
+    //                 y = 0;
+    //                 bounce = bounce * -1
+    //             }
+    //             y += bounce;
+
+
+    //         }
+    //         calculate = "wait";
+    //         if (paddle1y < y) {
+    //             paddle1y += 200
+    //         }
+
+    //     }
+    // } else if (directionx == 1 && calculate == "wait") {
+    //     calculate = false;
+    // }
 
     if (ballxspeed > 0) {
         directionx = 1
@@ -56,15 +84,15 @@ function loop() {
         directiony = -1
     }
 
-    if (framecount == 800) {
+    if (framecount == 900) {
         ballxspeed = 7 * directionx
         ballyspeed = 7 * directiony
     }
 
-    if (framecount == 1200) {
+    if (framecount == 1300) {
         ballxspeed += directionx
         ballyspeed += directiony
-        framecount = 801
+        framecount = 901
     }
 
     // Right paddle movement
