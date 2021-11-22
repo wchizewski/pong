@@ -26,6 +26,18 @@ let directionx = 0
 let directiony = 0
 let calculate = false;
 
+
+// ctx.fillStyle = "black";
+// ctx.fillRect(0, 0, cnv.width, cnv.height);
+
+// ctx.font = "80px Arial";
+// ctx.fillStyle = "white";
+// ctx.fillText("1 PLAYER", 375, 250);
+
+// ctx.font = "80px Arial";
+// ctx.fillStyle = "white";
+// ctx.fillText("2 PLAYER", 375, 400);
+
 // animate
 requestAnimationFrame(loop);
 function loop() {
@@ -64,7 +76,7 @@ function loop() {
     //         }
     //         calculate = "wait";
     //         if (paddle1y < y) {
-    //             paddle1y += 200
+    //             paddle1y = y
     //         }
 
     //     }
@@ -130,6 +142,8 @@ function loop() {
     if (ballx < paddle2x + 15 && ballx + 15 > paddle2x && bally + 20 > paddle2y && bally < paddle2y + 100) {
         ballx = paddle2x - 15
         ballxspeed -= ballxspeed * 2;
+        // getRandomInt()
+        // ballyspeed = getRandomInt()
     }
 
     if (ballx < paddle1x + 15 && ballx + 15 > paddle1x && bally + 20 > paddle1y && bally < paddle1y + 100) {
@@ -197,6 +211,11 @@ function loop() {
     requestAnimationFrame(loop);
 }
 
+// function getRandomInt(min = -8, max = -3) {
+//     min = Math.ceil(min);
+//     max = Math.floor(max);
+//     Math.floor(Math.random() * (max - min) + min)
+// }
 
 function ballReset() {
     ballx = 535;
