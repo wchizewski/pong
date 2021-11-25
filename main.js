@@ -143,7 +143,6 @@ function loop() {
         ballx = paddle2x - 15
         ballxspeed -= ballxspeed * 2;
         let random = Math.floor(Math.random() * (-3 - -7)) + -7;
-        console.log(random)
         ballyspeed = random
 
     }
@@ -152,7 +151,6 @@ function loop() {
         ballx = paddle1x + 15
         ballxspeed += ballxspeed * -2;
         random = Math.floor(Math.random() * (3 - 7)) + 7;
-        console.log(random)
         ballyspeed = random
     }
 
