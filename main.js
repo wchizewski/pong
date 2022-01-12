@@ -142,16 +142,16 @@ function loop() {
     if (ballx < paddle2x + 15 && ballx + 15 > paddle2x && bally + 20 > paddle2y && bally < paddle2y + 100) {
         ballx = paddle2x - 15
         ballxspeed -= ballxspeed * 2;
-        let random = Math.floor(Math.random() * (-3 - -7)) + -7;
-        ballyspeed = random
+        // let random = Math.floor(Math.random() * (-3 - -7)) + -7;
+        // ballyspeed = random
 
     }
 
     if (ballx < paddle1x + 15 && ballx + 15 > paddle1x && bally + 20 > paddle1y && bally < paddle1y + 100) {
         ballx = paddle1x + 15
         ballxspeed += ballxspeed * -2;
-        random = Math.floor(Math.random() * (3 - 7)) + 7;
-        ballyspeed = random
+        // random = Math.floor(Math.random() * (3 - 7)) + 7;
+        // ballyspeed = random
     }
 
     if (ballx + 25 == cnv.width) {
@@ -214,7 +214,6 @@ function loop() {
 
 function ballReset() {
     ballx = 535;
-    bally = 335;
     framecount = 120
     let randomside = Math.random()
     if (randomside < 0.5) {
