@@ -26,18 +26,6 @@ let directionx = 0
 let directiony = 0
 let calculate = false;
 
-
-// ctx.fillStyle = "black";
-// ctx.fillRect(0, 0, cnv.width, cnv.height);
-
-// ctx.font = "80px Arial";
-// ctx.fillStyle = "white";
-// ctx.fillText("1 PLAYER", 375, 250);
-
-// ctx.font = "80px Arial";
-// ctx.fillStyle = "white";
-// ctx.fillText("2 PLAYER", 375, 400);
-
 // animate
 requestAnimationFrame(loop);
 function loop() {
@@ -71,14 +59,11 @@ function loop() {
     //                 bounce = bounce * -1
     //             }
     //             y += bounce;
-
-
     //         }
     //         calculate = "wait";
     //         if (paddle1y < y) {
     //             paddle1y = y
     //         }
-
     //     }
     // } else if (directionx == 1 && calculate == "wait") {
     //     calculate = false;
@@ -101,7 +86,7 @@ function loop() {
         ballyspeed = 7 * directiony
     }
 
-    if (framecount == 1300) {
+    if (framecount == 1450) {
         ballxspeed += directionx
         ballyspeed += directiony
         framecount = 901
@@ -142,16 +127,15 @@ function loop() {
     if (ballx < paddle2x + 15 && ballx + 15 > paddle2x && bally + 20 > paddle2y && bally < paddle2y + 100) {
         ballx = paddle2x - 15
         ballxspeed -= ballxspeed * 2;
-        // let random = Math.floor(Math.random() * (-3 - -7)) + -7;
-        // ballyspeed = random
-
+        let random = Math.floor(Math.random() * (3.5 - 7)) + 7
+        ballyspeed = random * directiony
     }
 
     if (ballx < paddle1x + 15 && ballx + 15 > paddle1x && bally + 20 > paddle1y && bally < paddle1y + 100) {
         ballx = paddle1x + 15
         ballxspeed += ballxspeed * -2;
-        // random = Math.floor(Math.random() * (3 - 7)) + 7;
-        // ballyspeed = random
+        random = Math.floor(Math.random() * (3.5 - 7)) + 7;
+        ballyspeed = random * directiony
     }
 
     if (ballx + 25 == cnv.width) {
